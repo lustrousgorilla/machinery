@@ -46,7 +46,7 @@ defmodule MachineryTest.ResourceControllerTest do
     page = 1
     conn = Machinery.Plug.call(conn(:get, "/machinery/api/resources/#{state}/#{page}"), [])
     resources_maps = Enum.map(TestRepo.all(nil), &stringify_keys/1)
-    assert Poison.decode!(conn.resp_body) == resources_maps
+    assert Jason.decode!(conn.resp_body) == resources_maps
   end
 
   @tag :capture_log
@@ -54,7 +54,7 @@ defmodule MachineryTest.ResourceControllerTest do
     state = List.first(TestStateMachine._machinery_states())
     page = 2
     conn = Machinery.Plug.call(conn(:get, "/machinery/api/resources/#{state}/#{page}"), [])
-    assert Poison.decode!(conn.resp_body) == []
+    assert Jason.decode!(conn.resp_body) == []
   end
 
   @tag :capture_log
@@ -73,7 +73,7 @@ defmodule MachineryTest.ResourceControllerTest do
     updated_stuct = %{"state" => "partial", "missing_fields" => true, "id" => "1"}
     id = Map.get(updated_stuct, "id")
     conn = Machinery.Plug.call(conn(:post, "/machinery/api/resources/#{updated_stuct["id"]}", state: "partial"), [])
-    assert Poison.decode!(conn.resp_body) == ["ok", id]
+    assert Jason.decode!(conn.resp_body) == ["ok", id]
   end
 
   defp stringify_keys(nil), do: nil

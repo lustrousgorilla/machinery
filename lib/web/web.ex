@@ -13,6 +13,8 @@ defmodule Machinery.Web do
   def controller do
     quote do
       use Phoenix.Controller
+
+      import Plug.Conn
     end
   end
 
@@ -21,17 +23,20 @@ defmodule Machinery.Web do
       use Phoenix.View, root: "lib/web/templates"
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
-      import Machinery.Router.Helpers
+
+      alias Machinery.Router.Helpers, as: Routes
     end
   end
 
   def router do
     quote do
       use Phoenix.Router
+      import Plug.Conn
+      import Phoenix.Controller
     end
   end
 

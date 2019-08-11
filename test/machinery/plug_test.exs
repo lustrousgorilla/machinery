@@ -14,7 +14,7 @@ defmodule MachineryTest.PlugTest do
   end
 
   @tag :capture_log
-  test "Machinery.Plug should send the request to Machinery.ResourceControlller the if `interface` is set as true" do
+  test "Machinery.Plug should send the request to Machinery.ResourceController the if `interface` is set as true" do
     conn = Machinery.Plug.call(conn(:get, "/"), "/")
     assert conn.state == :sent
     assert conn.status == 200

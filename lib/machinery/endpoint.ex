@@ -5,19 +5,24 @@ defmodule Machinery.Endpoint do
   use Phoenix.Endpoint, otp_app: :machinery
 
   plug Plug.Static,
-    at: "/", from: :machinery, gzip: false,
+    at: "/",
+    from: :machinery,
+    gzip: false,
     only: ~w(css fonts images js)
+
+  plug Plug.Parsers,
+    parsers: [:urlencoded, :multipart, :json],
+    pass: ["*/*"],
+    json_decoder: Phoenix.json_library(),
+    length: 500_000_000
+
+  plug Plug.MethodOverride
+  plug Plug.Head
 
   plug Plug.Session,
     store: :ets,
     key: "machinery_sid",
     table: :machinery_session
-
-  plug Plug.Parsers,
-    parsers: [:urlencoded, :multipart, :json],
-    pass: ["*/*"],
-    json_decoder: Application.get_env(:phoenix, :json_library, Poison),
-    length: 500_000_000
 
   auth_options = Application.get_env(:machinery, :authorization)
   if auth_options do

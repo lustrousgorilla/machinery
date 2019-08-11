@@ -31,13 +31,14 @@ defmodule Machinery.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix, "~> 1.3"},
-      {:phoenix_html, "~> 2.9"},
-      {:cowboy, "~> 1.0"},
-      {:excoveralls, "~> 0.7", only: :test},
-      {:ecto, "~> 3.0"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:basic_auth, "~> 2.2.3", optional: true}
+      {:phoenix, "~> 1.4"},
+      {:phoenix_html, "~> 2.11"},
+      {:plug_cowboy, "~> 2.0"},
+      {:excoveralls, "~> 0.11", only: :test},
+      {:ecto, "~> 3.1"},
+      {:jason, "~> 1.0"},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:basic_auth, "~> 2.2", optional: true}
     ]
   end
 
@@ -55,3 +56,7 @@ defmodule Machinery.Mixfile do
     ]
   end
 end
+
+# Failed to use "cowboy" because
+#   machinery (version 0.17.0) requires ~> 1.0
+#   mix.lock specifies 2.6.1

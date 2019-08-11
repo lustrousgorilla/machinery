@@ -64,7 +64,11 @@ defmodule Machinery.Plug do
     String.starts_with?(conn.request_path, path)
   end
 
-  defp forward(conn, path) do
-    Phoenix.Router.Route.forward(conn, path_segments(path), Machinery.Endpoint, [])
+  defp forward(%Plug.Conn{path_info: path_info, script_name: script} = conn, path) do
+    new_path = path_info -- path_segments(path)
+    {base, ^new_path} = Enum.split(path_info, length(path_info) - length(new_path))
+
+    conn = %Plug.Conn{conn | path_info: new_path, script_name: script ++ base} |> Machinery.Endpoint.call([])
+    %Plug.Conn{conn | path_info: path_info, script_name: script}
   end
 end

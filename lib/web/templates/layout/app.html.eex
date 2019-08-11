@@ -8,30 +8,30 @@
     <meta name="author" content="">
     <title>Machinery Dashboard</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
-    <link rel="stylesheet" href="<%= static_path(@conn, "#{@mount_path}/css/app.css") %>">
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "#{@mount_path}css/app.css") %>">
   </head>
 
   <body data-mounted-path="<%= @mount_path %>">
     <div class="container-fluid">
       <div class="row">
         <nav class="navbar navbar-expand-md fixed-top topbar">
-          <h1 class="site-title"><%= link("Machinery", to: resource_path(@conn, :index))%></h1>
+          <h1 class="site-title"><%= link("Machinery", to: Routes.resource_path(@conn, :index)) %></h1>
           <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-expanded="false">
             <span class="oi oi-menu" title="menu" aria-hidden="true"></span>
           </button>
           <div class='navbar-collapse collapse' id="collapsibleNavbar">
             <ul class="nav nav-pills flex-column">
               <li class="nav-item">
-                <%= link("Overview", to: resource_path(@conn, :index), class: "nav-link active") %>
+                <%= link("Overview", to: Routes.resource_path(@conn, :index), class: "nav-link active") %>
               </li>
             </ul>
           </div>
         </nav>
         <nav class="col-sm-1 col-md-1 d-none d-sm-block sidebar">
-          <h1 class="site-title"><%= link("Machinery", to: resource_path(@conn, :index))%></h1>
+          <h1 class="site-title"><%= link("Machinery", to: Routes.resource_path(@conn, :index))%></h1>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <%= link("Overview", to: resource_path(@conn, :index), class: "nav-link active") %>
+              <%= link("Overview", to: Routes.resource_path(@conn, :index), class: "nav-link active") %>
             </li>
           </ul>
         </nav>
@@ -43,6 +43,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="<%= static_path(@conn, "#{@mount_path}/js/app.js") %>"></script>
+    <script src="<%= Routes.static_path(@conn, "#{@mount_path}js/app.js") %>"></script>
   </body>
 </html>

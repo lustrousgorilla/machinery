@@ -4,3 +4,5 @@ use Mix.Config
 
 config :machinery,
   interface: false
+
+config :phoenix, :json_library, Jason
